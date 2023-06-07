@@ -1,2 +1,4 @@
 #!/bin/bash
-find . -name '*.html' -not -newer ../\* 2> /dev/null -exec cp {} .. \
+find . -name '*.html' -not -newer ../\* 2> /dev/null
+-exec cp {} ..
+-exec cp {} ..
