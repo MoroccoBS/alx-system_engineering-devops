@@ -1,2 +1,2 @@
 #!/bin/bash  
-for f in *.html /n do cp $f .. /n done
+for f in *.html; do cp $f ..; done
