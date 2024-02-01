@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Check if Apache is running and stop it
+if [ $(pgrep -c apache2) -gt 0 ]; then
+  sudo service apache2 stop
+fi
+
+# Check the port number in /etc/nginx/sites-available/default and replace it with 80 if different
+if [ $(grep -c "listen 80;" /etc/nginx/sites-available/default) -eq 0 ]; then
+  sudo sed -i "s/listen [0-9]*;/listen 80;/" /etc/nginx/sites-available/default
+fi
+
+# Check the port number in /etc/nginx/conf.d/default.conf and replace it with 80 if different
+if [ $(grep -c "listen 80;" /etc/nginx/conf.d/default.conf) -eq 0 ]; then
+  sudo sed -i "s/listen [0-9]*;/listen 80;/" /etc/nginx/conf.d/default.conf
+fi
+
+# Check the port number in /etc/nginx/nginx.conf and replace it with 80 if different
+if [ $(grep -c "listen 80;" /etc/nginx/nginx.conf) -eq 0 ]; then
+  sudo sed -i "s/listen [0-9]*;/listen 80;/" /etc/nginx/nginx.conf
+fi
+
+# Reload Nginx
+sudo service nginx reload
